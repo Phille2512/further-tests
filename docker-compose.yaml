@@ -1,0 +1,35 @@
+version: "3"
+
+services: 
+  app: 
+    build: .
+    # port mapping?
+    ports: 
+      - "8080:8080"
+    entrypoint: ["uvicorn", "app.main2:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
+    volumes: 
+      # Mapping --> We could also map app:app to just update files of the app (With that we are more precise in store different things)
+      - .:/usr/src
+
+
+# https://stackoverflow.com/questions/33827342/how-to-connect-mysql-workbench-to-running-mysql-inside-docker#comment87863756_46842205
+  
+  mysql_db: 
+    image: mysql:latest
+    ports: 
+      - "3308:3306"
+    environment:
+    # we could also store env values in an env.file? 
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - type: volume
+        source: pgdb
+        target: /var/lib/mysql
+
+
+volumes: 
+  pgdb:
+    
