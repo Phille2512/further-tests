@@ -17,7 +17,6 @@ ENV PATH=${PATH}:${PYROOT}/bin
 RUN addgroup -S myapp && adduser -S -G myapp user -u 1234
 COPY --chown=user:myapp --from=base ${PYROOT}/ ${PYROOT}/
 
-RUN pip install uvicorn
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src
 

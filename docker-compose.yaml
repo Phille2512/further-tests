@@ -9,25 +9,32 @@ services:
     entrypoint: ["uvicorn", "app.main2:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
     volumes: 
       # Mapping --> We could also map app:app to just update files of the app (With that we are more precise in store different things)
-      - .:/usr/src
+      - ./app:/usr/src/app
+      - ./models:/usr/src/models
+    environment: 
+      #- db_host=mysql://username:password@hostadress:3308/db_name
+      # hostadress is name of service or in other cases a IP_Address
+      - db_host=postgresql://postgres:postgres@postgres_db:5432/postgres'
+      # is it right? Why do I need this?
 
+    # database need to be run to run the application properly
+    depends_on: 
+      - postgres_db
 
-# https://stackoverflow.com/questions/33827342/how-to-connect-mysql-workbench-to-running-mysql-inside-docker#comment87863756_46842205
-  
-  mysql_db: 
-    image: mysql:latest
+  postgres_db: 
+    image: postgres:latest
     ports: 
-      - "3308:3306"
-    environment:
+      - "5434:5432"
+    env_file:
+    - .env-local
+
+    #environment:
     # we could also store env values in an env.file? 
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      #POSTGRES_USER: postgres
+      #POSTGRES_DB: postgres
+      #POSTGRES_PASSWORD: postgres
     volumes:
-      - type: volume
-        source: pgdb
-        target: /var/lib/mysql
+      - pgdb:/var/lib/postgresql/database
 
 
 volumes: 

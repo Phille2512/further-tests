@@ -1,0 +1,26 @@
+Mongo DB Connect:
+
+mongodb+srv://phille2512:Maultier95@test01.9zwwyhf.mongodb.net/?retryWrites=true&w=majority
+
+IP-Adresse App Container:
+172.21.0.3
+
+
+
+# https://stackoverflow.com/questions/33827342/how-to-connect-mysql-workbench-to-running-mysql-inside-docker#comment87863756_46842205
+# https://www.debuntu.org/how-to-create-a-mysql-database-and-set-privileges-to-a-user/
+  mysql_db: 
+    image: mysql:latest
+    ports: 
+      - "3308:3306"
+    environment:
+    # we could also store env values in an env.file? 
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: analyze_music_db
+      MYSQL_USER: analyze_music_admin
+      MYSQL_PASSWORD: password
+
+
+
+Set this also: 
+  "(venv_app) phille@Air-von-Philipp Application  % source .env-migrations-local  "

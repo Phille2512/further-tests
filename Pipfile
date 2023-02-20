@@ -10,7 +10,6 @@ requests = "*"
 aiohttp = "*"
 uvicorn = "==0.20.0"
 sqlalchemy = "*"
-psycopg2-binary = "*"
 
 [dev-packages]
 anyio = "==3.6.2"
@@ -54,6 +53,15 @@ tornado = "==6.2"
 traitlets = "==5.8.1"
 typing-extensions = "==4.4.0"
 wcwidth = "==0.2.6"
+pymysql = "*"
+cryptography = "*"
+mysql-connector-python = "*"
+alembic = "*"
+sqlalchemy = "*"
+psycopg2-binary = "*"
+pandas = "*"
+mysqlclient = "*"
+pymongo = "*"
 
 [requires]
 python_version = "3.10"
